@@ -17,12 +17,12 @@
 package androidx.compose.samples.crane.ui
 
 import androidx.compose.material.Typography
-import androidx.compose.samples.crane.R
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.compose6.R
 
 private val light = Font(R.font.raleway_light, FontWeight.W300)
 private val regular = Font(R.font.raleway_regular, FontWeight.W400)
