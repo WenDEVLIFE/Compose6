@@ -40,6 +40,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.samples.crane.R
 import androidx.compose.samples.crane.data.ExploreModel
 import androidx.compose.samples.crane.home.OnExploreItemClicked
 import androidx.compose.samples.crane.ui.BottomSheetShape
@@ -55,7 +56,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest.Builder
-import com.example.compose6.R
+
 
 
 @Composable

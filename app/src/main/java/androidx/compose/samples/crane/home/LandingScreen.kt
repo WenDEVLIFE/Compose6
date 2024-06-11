@@ -26,6 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import kotlinx.coroutines.delay
 
 
@@ -40,9 +42,10 @@ fun LandingScreen(onTimeout: () -> Unit, modifier: Modifier = Modifier) {
         // and call onTimeout() when finished.
         // Passing onTimeout as a parameter to LaunchedEffect
         // is wrong! Don't do this. We'll improve this code in a sec.
-        LaunchedEffect(onTimeout) {
+        val currentOnTimeout by rememberUpdatedState(onTimeout)
+        LaunchedEffect(Unit) {
             delay(SplashWaitTime) // Simulates loading things
-            onTimeout()
+            currentOnTimeout()
         }
         Image(painterResource(id = R.drawable.ic_crane_drawer), contentDescription = null)
     }

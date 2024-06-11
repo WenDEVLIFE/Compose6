@@ -38,7 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 typealias OnExploreItemClicked = (ExploreModel) -> Unit
 
 enum class CraneScreen {
@@ -57,13 +58,15 @@ fun CraneHome(
         drawerContent = {
             CraneDrawer()
         }
-    ) { padding ->
+    ) { paddingValues ->
+        val scope = rememberCoroutineScope()
         CraneHomeContent(
-            modifier = modifier.padding(padding),
+            modifier = modifier.padding(paddingValues), // Use the paddingValues here
             onExploreItemClicked = onExploreItemClicked,
             openDrawer = {
-                // TODO Codelab: rememberCoroutineScope step - open the navigation drawer
-                // scaffoldState.drawerState.open()
+                scope.launch {
+                    scaffoldState.drawerState.open()
+                }
             }
         )
     }
@@ -77,8 +80,7 @@ fun CraneHomeContent(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(),
 ) {
-    // TODO Codelab: collectAsStateWithLifecycle step - consume stream of data from the ViewModel
-    val suggestedDestinations by viewModel.suggestedDestinations.collectAsStateWithLifecycle()
+    val suggestedDestinations by viewModel.suggestedDestinations.collectAsStateWithLifecycle(emptyList())
     val onPeopleChanged: (Int) -> Unit = { viewModel.updatePeople(it) }
     var tabSelected by remember { mutableStateOf(CraneScreen.Fly) }
 
@@ -123,6 +125,7 @@ fun CraneHomeContent(
         }
     )
 }
+
 
 @Composable
 private fun HomeTabBar(
